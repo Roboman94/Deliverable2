@@ -1,36 +1,42 @@
-﻿using System;
-using System.Text;
-
-public static class Extention
+﻿namespace ConsoleApp2
 {
-	public static byte[] ToByteArray(this string upinput, Encoding encoding)
-	{
-		return encoding.GetBytes(upinput);
-	}
-}
-
-public class Program
-{
-	public static void Main()
-	{
-
-		Encoding encoding = Encoding.Unicode;
-
-		Console.WriteLine("Enter here: ");
-		//input variable
-		string input = Console.ReadLine();
-		string upinput = input.ToUpper();
-		byte[] array = upinput.ToByteArray(encoding);
-		int checksum = 0;
-		for (int i = 0; i < array.Length; i++)
-		{
-			checksum += array[i];
-		}
-		string message = String.Join('-', array);
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            ///User entry
+            Console.WriteLine("Enter");
+            string input = Console.ReadLine();
+            string upinput = input.ToUpper(); 
 
 
-		///result
-		Console.WriteLine("Your encoded message is " + message);
-		Console.WriteLine("Message checksum is  " + checksum);
-	}
+            ///Array variable
+            string message = String.Empty;
+            char[] carray = upinput.ToCharArray();
+            int convertedchar = '\0';
+            
+           for (int i = 0; i < carray.Length; i++)
+            {
+                convertedchar = (char)(carray[i] + 32);
+            }
+
+            String convertedstring = convertedchar.ToString();
+
+
+            ///Determines checksum from user input
+            int checksum = 0;
+            for (int i = 0; i < upinput.Length; i++)
+            {
+                checksum += upinput[i];
+                
+            }
+
+            ///Result
+            message = String.Join('-', convertedstring);
+            Console.WriteLine("Your encoded message is " + message);
+            Console.WriteLine("Message checksum is  " + checksum);
+
+
+        }
+    }
 }
